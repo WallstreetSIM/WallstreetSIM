@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WallstreetBull - Stock Market Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        p {
+            line-height: 1.6;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>WallstreetBull - Stock Market Simulation</h1>
+    </header>
+    <div class="container">
+        <button onclick="refreshStockPrices()">Refresh Stock Prices</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Stock</th>
+                    <th>Price</th>
+                    <th>Buy</th>
+                    <th>Sell</th>
+                </tr>
+            </thead>
+            <tbody id="stockTableBody">
+                <!-- Stock data will be populated here dynamically -->
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <p>&copy; 2024 WallstreetBull</p>
+    </footer>
+
+    <script>
+        // Function to generate random stock prices
+        function generateRandomPrice() {
+            return (Math.random() * (100 - 1) + 1).toFixed(2);
+        }
+
+        // Function to refresh stock prices
+        function refreshStockPrices() {
+            const stockData = [
+                { name: 'AAPL', price: generateRandomPrice() },
+                { name: 'GOOGL', price: generateRandomPrice() },
+                { name: 'MSFT', price: generateRandomPrice() },
+                { name: 'AMZN', price: generateRandomPrice() }
+            ];
+
+            const stockTableBody = document.getElementById('stockTableBody');
+            stockTableBody.innerHTML = '';
+
+            stockData.forEach(stock => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${stock.name}</td>
+                    <td>$${stock.price}</td>
+                    <td><button onclick="buyStock('${stock.name}', ${stock.price})">Buy</button></td>
+                    <td><button onclick="sellStock('${stock.name}', ${stock.price})">Sell</button></td>
+                `;
+                stockTableBody.appendChild(row);
+            });
+        }
+
+        // Function to simulate buying a stock
+        function buyStock(name, price) {
+            alert(`You bought ${name} stock for $${price}`);
+            // Add logic to handle buying stock
+        }
+
+        // Function to simulate selling a stock
+        function sellStock(name, price) {
+            alert(`You sold ${name} stock for $${price}`);
+            // Add logic to handle selling stock
+        }
+
+        // Initial load
+        refreshStockPrices();
+    </script>
+</body>
+</html>
